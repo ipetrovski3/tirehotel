@@ -1,0 +1,62 @@
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      Tire document: <%= "#{@client.warehouse_id}-#{Time.now.strftime("%Y")}/#{@client.id}" %>
+    </p>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      <h1><%= @client.name %></h1>
+      <div class="columns">
+        <div class="column is-two-fifths">
+          <p>Email: <%= @client.email %></p>
+          <p>Phone: <%= @client.phone %></p>
+        </div>
+        <div class="column is-two-fifths">
+          <% @client.tireinfos.each do |tire| %>
+            <p><%= tire.brand %></p>
+            <p><%= tire.dimension %></p>
+            <% if tire.wheels %>
+              <p>Wheels <i class="fas fa-lg fa-check-square" style="color: green"></i></p>
+            <% else %>
+              <p>Wheels <i class="far fa-lg fa-window-close" style="color: red"></i></p>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="column is-two-fifths">
+        <% @client.vehicleinfos.each do |car| %>
+          <p>Car Model: <%= car.brand %> </p>
+          <p>Plate: <%= car.plate %></p>
+        <% end %>
+      </div>
+      <br>
+      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+    </div>
+  </div>
+  <footer class="card-footer">
+    <% if request.format.to_sym == :pdf %>
+      <div class="content ml-2" >
+        <li> При подигнување на гумите задолжително да се приложи овој документ </li>
+        <li> Чувањето на гумите се однесува на една сезона </li>
+        <li> Пнеуматик не сноси одговорност за било каква материјална штета предизвикана од елементарни непогоди и виша сила </li>
+        <br>
+      </div>
+    <% else %>
+      <%= link_to warehouse_client_path(@client, format: :pdf), target: "_blank",  class:"card-footer-item clientlink" do %>
+        <span>Print <i class="fas fa-print"></i></span>
+      <% end %>
+      <%= link_to warehouse_transfer_client_path(@client.warehouse, @client), class:"card-footer-item clientlink" do %>
+        <span>Change Warehouse <i class="fas fa-truck"></i></span>
+      <% end %>
+      <%= link_to edit_warehouse_client_path(@client.warehouse, @client), class:"card-footer-item clientlink" do %>
+        <span>Edit <i class="far fa-edit"></i></span>
+      <% end %>
+      <%= link_to warehouse_client_path(@client.warehouse, @client), method: :delete, class:"card-footer-item clientlink" do %>
+        <span>Delete <i class="far fa-trash-alt"></i></span>
+      <% end %>
+    <% end %>
+  </footer>
+</div>
+<br>
+<%= link_to 'Back', :back, class:"button is-fullwidth is-large mainbtn" %>

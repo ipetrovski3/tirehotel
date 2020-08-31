@@ -10,26 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_28_200743) do
-
+ActiveRecord::Schema.define(version: 20_200_829_195_932) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "clients", force: :cascade do |t|
-    t.string "name"
-    t.string "phone"
-    t.string "email"
-    t.bigint "warehouse_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["warehouse_id"], name: "index_clients_on_warehouse_id"
+  create_table 'clients', force: :cascade do |t|
+    t.string 'name'
+    t.string 'phone'
+    t.string 'email'
+    t.bigint 'warehouse_id', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['warehouse_id'], name: 'index_clients_on_warehouse_id'
   end
 
-  create_table "warehouses", force: :cascade do |t|
-    t.string "location"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'tireinfos', force: :cascade do |t|
+    t.string 'brand'
+    t.string 'dimension'
+    t.string 'qty'
+    t.boolean 'wheels'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.bigint 'client_id'
+    t.index ['client_id'], name: 'index_tireinfos_on_client_id'
   end
 
-  add_foreign_key "clients", "warehouses"
+  create_table 'vehicleinfos', force: :cascade do |t|
+    t.string 'brand'
+    t.string 'plate'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.bigint 'client_id'
+    t.index ['client_id'], name: 'index_vehicleinfos_on_client_id'
+  end
+
+  create_table 'warehouses', force: :cascade do |t|
+    t.string 'location'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+  end
+
+  add_foreign_key 'clients', 'warehouses'
+  add_foreign_key 'tireinfos', 'clients'
+  add_foreign_key 'vehicleinfos', 'clients'
 end

@@ -1,2 +1,2 @@
-<h1>Warehouses#show</h1>
-<p>Find me in app/views/warehouses/show.html.erb</p>
+<%= link_to 'New Client', new_warehouse_client_path(@warehouse, @client), class:"button is-large is-danger mb-3" %>
+<%= render 'shared/clients', client: @warehouse.clients %>

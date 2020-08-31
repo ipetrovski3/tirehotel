@@ -1,0 +1,27 @@
+<table class="table table is-striped">
+  <thead>
+    <tr>
+      <th>WH</th>
+      <th>Client name</th>
+      <th>Client email</th>
+      <th>Vehicle Plate</th>
+      <th>Tires Dimension</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% client.each do |client| %>
+        <tr>
+          <td><%= client.warehouse_id %></td>
+          <td><%= link_to client.name, warehouse_client_path(client.warehouse, client), class:'clientlink'%>
+          </td>
+          <td><%= client.email %></td>
+          <% client.vehicleinfos.each do |car| %>
+            <td><%= car.plate %></td>
+          <% end %>
+          <% client.tireinfos.each do |tire| %>
+            <td><%= tire.dimension %></td>
+          <% end %>
+        </tr>
+      <% end %>
+  </tbody>
+</table>

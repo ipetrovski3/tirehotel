@@ -1,0 +1,21 @@
+<nav class="navbar mt-3">
+  <div class="navbar-brand">
+    <%= link_to image_tag("https://assets-websites.generadevelopment.com/easycms/pneumatik/img/logo.png"), root_path %>
+  </div>
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+    </div>
+    <div class="navbar-end">
+      <%= form_with url: "/search", method: :get, local: true do |form| %>
+        <div class="field has-addons navbar-item">
+          <div class="control">
+            <%= form.text_field :query, class:"input" %>
+          </div>
+          <div class="control">
+            <%= form.submit "Search", class:"button is-danger" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</nav>

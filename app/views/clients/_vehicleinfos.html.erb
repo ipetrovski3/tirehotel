@@ -1,0 +1,11 @@
+<h1 class="subtitle">Car info:</h1>
+<%= form.fields_for :vehicleinfos do |car| %>
+  <div class="field">
+    <%= car.label "Car Model", class:"label" %>
+    <%= car.text_field :brand, class:"input" %>
+  </div>
+  <div class="field">
+    <%= car.label :plate, class:"label" %>
+    <%= car.text_field :plate, class:"input" %>
+  </div>
+<% end %>

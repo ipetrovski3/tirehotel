@@ -1,0 +1,19 @@
+<h1 class="subtitle">Tires Info:</h1>
+<%= form.fields_for :tireinfos do |tire_info| %>
+  <div class="field">
+    <%= tire_info.label :brand, class:"label" %>
+    <%= tire_info.text_field :brand, class:"input" %>
+  </div>
+  <div class="field">
+    <%= tire_info.label :dimension, class:"label" %>
+    <%= tire_info.text_field :dimension, class:"input" %>
+  </div>
+  <div class="field">
+    <%= tire_info.label :qty, class:"label" %>
+    <%= tire_info.text_field :qty, class:"input" %>
+  </div>
+  <div class="field">
+    <%= tire_info.label :wheels, class:"checkbox" %>
+    <%= tire_info.check_box :wheels, class:"checkbox" %>
+  </div>
+<% end %>

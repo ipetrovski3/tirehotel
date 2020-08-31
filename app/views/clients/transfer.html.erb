@@ -1,0 +1,6 @@
+<%= form_with model: [@warehouse, @client], local: true do |form| %>
+<div class="select">
+<%= collection_select(:client, :warehouse_id, Warehouse.all, :id, :location) %>
+</div>
+<%= form.submit "Change Location", class:"button is-danger"%>
+<% end %>

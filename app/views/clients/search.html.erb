@@ -1,0 +1,7 @@
+<% if @client.count == 0 %>
+No clients found!
+<% end %>
+
+
+<%= render 'shared/clients', client: @client %>
+<%= link_to "back", :back %>

@@ -1,0 +1,20 @@
+<div class="column is-four-fifths">
+  <h1 class="subtitle">Client info:</h1>
+  <%= form_with model: [@warehouse, @client], local: true do |form| %>
+    <div class="field">
+      <%= form.label :name, class:"label" %>
+      <%= form.text_field :name, class:"input" %>
+    </div>
+    <div class="field">
+      <%= form.label :phone, class:"label" %>
+      <%= form.text_field :phone, class:"input" %>
+    </div>
+    <div class="field">
+      <%= form.label :email, class:"label" %>
+      <%= form.text_field :email, class:"input" %>
+    </div>
+    <%= render 'clients/tireinfos', form: form %>
+    <%= render 'clients/vehicleinfos', form: form %>
+    <%= form.submit "Save", class:"button is-large is-fullwidth is-danger" %>
+  <% end %>
+</div>
