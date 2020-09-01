@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_action :set_warehouse, except: %i[create update search destroy]
+  before_action :set_warehouse, except: %i[search destroy]
   before_action :set_client, except: %i[new create search destroy]
 
   def new
