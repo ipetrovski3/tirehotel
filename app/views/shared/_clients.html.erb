@@ -6,22 +6,28 @@
       <th>Client email</th>
       <th>Vehicle Plate</th>
       <th>Tires Dimension</th>
+      <th>Season</th>
     </tr>
   </thead>
   <tbody>
     <% client.each do |client| %>
-        <tr>
-          <td><%= client.warehouse_id %></td>
-          <td><%= link_to client.name, warehouse_client_path(client.warehouse, client), class:'clientlink'%>
-          </td>
-          <td><%= client.email %></td>
-          <% client.vehicleinfos.each do |car| %>
-            <td><%= car.plate %></td>
+      <tr>
+        <td><%= client.warehouse_id %></td>
+        <td><%= link_to client.name, warehouse_client_path(client.warehouse, client), class:'clientlink'%>
+        </td>
+        <td><%= client.email %></td>
+        <% client.vehicleinfos.each do |car| %>
+          <td><%= car.plate %></td>
+        <% end %>
+        <% client.tireinfos.each do |tire| %>
+          <td><%= tire.dimension %></td>
+          <% if  tire.season_id == 1 %>
+            <td>Summer</td>
+          <% else %>
+            <td>Winter</td>
           <% end %>
-          <% client.tireinfos.each do |tire| %>
-            <td><%= tire.dimension %></td>
-          <% end %>
-        </tr>
-      <% end %>
+        <% end %>
+      </tr>
+    <% end %>
   </tbody>
 </table>
