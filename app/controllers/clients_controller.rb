@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
   before_action :set_warehouse, except: %i[create update search destroy]
-  before_action :set_warehouse, expect: %i[new create search destroy]
+  before_action :set_client, except: %i[new create search destroy]
 
   def new
     @client = @warehouse.clients.build
@@ -63,7 +63,7 @@ class ClientsController < ApplicationController
   private
 
   def set_warehouse
-    @warehouse = @warehouse.find(params[:warehouse_id])
+    @warehouse = Warehouse.find(params[:warehouse_id])
   end
 
   def set_client
