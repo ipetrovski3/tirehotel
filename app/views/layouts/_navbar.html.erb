@@ -9,7 +9,7 @@
       <%= form_with url: "/search", method: :get, local: true do |form| %>
         <div class="field has-addons navbar-item">
           <div class="control">
-            <%= form.text_field :query, class:"input" %>
+            <%= form.text_field :query, class:"input", placeholder:"Search Client by Name" %>
           </div>
           <div class="control">
             <%= form.submit "Search", class:"button is-danger" %>

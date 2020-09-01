@@ -11,3 +11,20 @@ a.clientlink:hover {
   font-weight: bold;
   color: red;
 }
+
+
+li.client {
+  border: 1px solid black;
+  padding: 3px;
+  margin-top: 0px;
+  list-style: none;
+}
+
+
+.alignright {
+	float: right;
+}
+
+.fa-sun {
+  color: rgb(255, 230, 0)
+}

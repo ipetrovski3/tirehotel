@@ -1,6 +1,22 @@
-<%= form_with model: [@warehouse, @client], local: true do |form| %>
-<div class="select">
-<%= collection_select(:client, :warehouse_id, Warehouse.all, :id, :location) %>
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title has-text-centered">
+        <p>Change warehouse location for <strong><%= @client.name %></strong></p>
+        <p>Current warehouse <strong><%= @client.warehouse.location %></strong></p>
+      </h1>
+      <h2 class="subtitle">
+       <%= form_with model: [@warehouse, @client], local: true do |form| %>
+  <div class="select is-fullwidth is-large">
+    <%= collection_select(:client, :warehouse_id, Warehouse.all, :id, :location) %>
+  </div>
+  <div class="buttons mt-3">
+    <%= form.submit "Change Location", class:"button is-danger is-fullwidth"%>
+  <% end %>
+  <%= link_to 'Cancel', :back, class:'button is-fullwidth' %>
 </div>
-<%= form.submit "Change Location", class:"button is-danger"%>
-<% end %>
+
+      </h2>
+    </div>
+  </div>
+</section>

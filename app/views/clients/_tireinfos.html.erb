@@ -1,5 +1,10 @@
 <h1 class="subtitle">Tires Info:</h1>
 <%= form.fields_for :tireinfos do |tire_info| %>
+<%#= collection_select(:tire_info, :season_id, Season.all, :id, :name) %>
+<div class="select is-danger">
+
+<%= tire_info.select :season_id, options_from_collection_for_select( Season.all, :id, :name) %>
+</div>
   <div class="field">
     <%= tire_info.label :brand, class:"label" %>
     <%= tire_info.text_field :brand, class:"input" %>
