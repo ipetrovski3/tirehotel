@@ -1,14 +1,14 @@
 class ClientsController < ApplicationController
-  def new
-    @warehouse = Warehouse.find(params[:warehouse_id])
+  before_action :set_warehouse, except: %i[create update search destroy]
+  before_action :set_warehouse, expect: %i[new create search destroy]
 
+  def new
     @client = @warehouse.clients.build
     @client.tireinfos.build
     @client.vehicleinfos.build
   end
 
   def create
-    @warehouse = Warehouse.find(params[:warehouse_id])
     @client = @warehouse.clients.build(client_params)
     if @client.save
       redirect_to [@warehouse, @client]
@@ -18,15 +18,11 @@ class ClientsController < ApplicationController
   end
 
   def edit
-    @warehouse = Warehouse.find(params[:warehouse_id])
-
-    @client = Client.find(params[:id])
     @client.tireinfos.build if @client.tireinfos.blank?
     @client.vehicleinfos.build if @client.vehicleinfos.blank?
   end
 
   def update
-    @client = Client.find(params[:id])
     if @client.update(client_params)
       redirect_to warehouse_client_path
     else
@@ -35,7 +31,6 @@ class ClientsController < ApplicationController
   end
 
   def show
-    @client = Client.find(params[:id])
     respond_to do |format|
       format.html
       format.pdf do
@@ -44,8 +39,7 @@ class ClientsController < ApplicationController
                layout: 'pdf.html',
                encoding: 'utf-8',
                page_size: 'a4',
-               orientation: 'Portrait',
-               grayscale: true
+               orientation: 'Portrait'
       end
     end
   end
@@ -57,21 +51,28 @@ class ClientsController < ApplicationController
   def destroy
     client = Client.find(params[:id])
 
-    client.delete
+    if client.delete
+      redirect_to root_path
+    else
+      render :show
+    end
   end
 
-  def transfer
-    @warehouse = Warehouse.find(params[:warehouse_id])
-
-    @client = Client.find(params[:id])
-
-  end
+  def transfer; end
 
   private
 
+  def set_warehouse
+    @warehouse = @warehouse.find(params[:warehouse_id])
+  end
+
+  def set_client
+    @client = Client.find(params[:id])
+  end
+
   def client_params
     params.require(:client).permit(:name, :email, :phone, :warehouse_id,
-                                   tireinfos_attributes: %i[id dimension brand qty wheels _destroy],
+                                   tireinfos_attributes: %i[id dimension brand qty wheels _destroy season_id],
                                    vehicleinfos_attributes: %i[id brand plate _destroy])
   end
 end

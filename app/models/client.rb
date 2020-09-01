@@ -1,8 +1,8 @@
 class Client < ApplicationRecord
   belongs_to :warehouse
 
-  has_many :tireinfos, dependent: :delete_all
-  has_many :vehicleinfos, dependent: :delete_all
+  has_many :tireinfos, dependent: :destroy
+  has_many :vehicleinfos, dependent: :destroy
 
   accepts_nested_attributes_for :tireinfos, allow_destroy: true
   accepts_nested_attributes_for :vehicleinfos, allow_destroy: true
